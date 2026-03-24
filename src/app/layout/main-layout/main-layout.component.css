@@ -1,0 +1,7 @@
+a.cart-button {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,71 +1,4 @@
-<!-- @format -->
-
-<!doctype html>
-<html class="light" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Island Outdoor</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
-      rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <div class="overlay">
-      <span class="material-symbols-outlined close-menu">close</span>
-      <nav class="mobile-nav">
-        <a href="./about.html">About</a>
-        <a href="./contact.html">Contact</a>
-        <a class="nav-link" href="./signin.html">signin</a>
-        <a class="nav-link" href="./signup.html">signup</a>
-      </nav>
-    </div>
-
-    <div class="container">
-      <!-- Navbar -->
-      <header>
-        <div class="header-content">
-          <div class="header-inner">
-            <!-- Logo -->
-            <a class="home-link" href="./index.html"
-              ><div class="logo-container">
-                <div class="logo-icon">
-                  <span class="material-symbols-outlined">landscape</span>
-                </div>
-                <h2 class="logo-text">Island Outdoor</h2>
-              </div></a
-            >
-
-            <!-- Desktop Nav -->
-            <nav class="desktop-nav">
-              <a class="nav-link" href="./about.html">About</a>
-              <a class="nav-link" href="./contact.html">Contact</a>
-              <a class="nav-link" href="./signin.html">signin</a>
-              <a class="nav-link" href="./signup.html">signup</a>
-            </nav>
-            <!-- Cart -->
-            <div class="header-actions">
-              <button class="cart-button">
-                <span class="material-symbols-outlined"></span>
-                <span class="cart-badge"></span>
-              </button>
-              <!-- Mobile Menu Button -->
-              <button class="menu-button">
-                <span class="material-symbols-outlined">menu</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-      <!-- Main Content -->
-      <main>
+<main>
         <!-- Hero Section -->
         <section class="section">
           <div
@@ -81,10 +14,10 @@
                 Premium gear built for the Jamaican wild. From the Blue
                 Mountains to Seven Mile Beach.
               </p>
-              <button class="hero-button">
+              <a class="hero-button" routerLink="/shop">
                 <span>Shop Now</span>
                 <span class="material-symbols-outlined">arrow_forward</span>
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -279,65 +212,3 @@
           </div>
         </section>
       </main>
-      <!-- Footer -->
-      <footer>
-        <div class="footer-content">
-          <div class="footer-grid">
-            <!-- Brand -->
-            <div>
-              <a class="home-link" href="./index.html"
-                ><div class="logo-container">
-                  <div class="logo-icon">
-                    <span class="material-symbols-outlined">landscape</span>
-                  </div>
-                  <h2 class="logo-text">Jamaican Outdoor Gear</h2>
-                </div></a
-              >
-              <p class="footer-description">
-                Equipping Jamaicans for the outdoors since 2010. Quality gear
-                for island life.
-              </p>
-            </div>
-            <!-- Links -->
-            <div>
-              <h4 class="footer-section-title">Shop</h4>
-              <ul class="footer-links">
-                <li><a href="#">Hiking</a></li>
-                <li><a href="#">Camping</a></li>
-                <li><a href="#">Water Sports</a></li>
-                <li><a href="#">New Arrivals</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="footer-section-title">Company</h4>
-              <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Locations</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="footer-section-title">Support</h4>
-              <ul class="footer-links">
-                <li><a href="#">Shipping Policy</a></li>
-                <li><a href="#">Returns</a></li>
-                <li><a href="#">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p class="footer-copyright">
-              © 2026 Island Outdoor All rights reserved.
-            </p>
-            <div class="footer-social">
-              <a href="#"><span class="sr-only">Facebook</span>FB</a>
-              <a href="#"><span class="sr-only">Instagram</span>IG</a>
-              <a href="#"><span class="sr-only">Twitter</span>TW</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <script src="./index.js"></script>
-  </body>
-</html>

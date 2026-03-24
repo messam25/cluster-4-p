@@ -1,0 +1,117 @@
+<div class="signup-root">
+  <header class="site-header">
+    <div class="logo-section">
+      <div class="logo-icon">
+        <span class="material-symbols-outlined">landscape</span>
+      </div>
+      <h2 class="brand-name">JamGear Outdoor</h2>
+    </div>
+    <div class="nav-section">
+      <nav class="main-nav">
+        <a class="nav-link" routerLink="/">Home</a>
+        <a class="nav-link" routerLink="/signin">signin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="bg-decoration bg-decoration-top"></div>
+    <div class="bg-decoration bg-decoration-bottom"></div>
+
+    <div class="registration-container">
+      <div class="card-accent"></div>
+
+      <div class="card-content">
+        <div class="card-header">
+          <h1 class="card-title">Join the Adventure</h1>
+          <p class="card-subtitle">
+            Get gear designed for the island lifestyle.
+          </p>
+        </div>
+
+        <form class="registration-form" (ngSubmit)="onSubmit($event)">
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name</label>
+            <div class="input-wrapper">
+              <span class="material-symbols-outlined input-icon">person</span>
+              <input
+                id="fullName"
+                name="fullName"
+                class="form-input"
+                placeholder="Enter your full name"
+                type="text"
+                [(ngModel)]="fullName"
+                required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <div class="input-wrapper">
+              <span class="material-symbols-outlined input-icon">mail</span>
+              <input
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="name@example.com"
+                type="email"
+                [(ngModel)]="email"
+                required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-wrapper">
+              <span class="material-symbols-outlined input-icon">lock</span>
+              <input
+                id="password"
+                name="password"
+                class="form-input"
+                placeholder="Create a strong password"
+                type="password"
+                [(ngModel)]="password"
+                required />
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-wrapper">
+              <input
+                class="form-checkbox"
+                id="terms"
+                name="terms"
+                type="checkbox"
+                [(ngModel)]="termsAccepted" />
+            </div>
+            <label class="checkbox-label" for="terms">
+              I agree to the <a href="#">Terms of Service</a> and
+              <a href="#">Privacy Policy</a>.
+            </label>
+          </div>
+
+          <button class="btn-submit" type="submit">
+            <span>Create Account</span>
+          </button>
+        </form>
+
+        <div class="switch-auth">
+          <p class="switch-text">
+            Already have an account?
+            <a class="switch-link" routerLink="/signin">Log In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-icons">
+      <span class="material-symbols-outlined">hiking</span>
+      <span class="material-symbols-outlined">kayaking</span>
+      <span class="material-symbols-outlined">camping</span>
+      <span class="material-symbols-outlined">surfing</span>
+    </div>
+    <p class="footer-text">© 2024 JamGear Outdoor - Built for the Island</p>
+  </footer>
+</div>

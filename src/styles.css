@@ -1,3 +1,10 @@
+@import url('assets/about-page.css');
+@import url('assets/contact-page.css');
+@import url('assets/shop-page.css');
+@import url('assets/cart-page.css');
+@import url('assets/signin-page.css');
+@import url('assets/signup-page.css');
+
 /* Reset and Base Styles */
 * {
   margin: 0;

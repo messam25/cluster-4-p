@@ -1,0 +1,102 @@
+<main class="container main-content">
+  <section class="page-header">
+    <div class="header-text">
+      <h1 class="page-title">All Gear</h1>
+      <p class="page-subtitle">
+        Premium outdoor equipment designed for the island life.
+      </p>
+    </div>
+  </section>
+
+  <section class="filters-section">
+    <div class="filters-row">
+      <div class="filters-group">
+        <div class="select-wrapper">
+          <label class="sr-only" for="category-select">Category</label>
+          <select
+            id="category-select"
+            name="category"
+            class="custom-select"
+            [(ngModel)]="selectedCategory"
+            (ngModelChange)="applyFilters()">
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <div class="select-wrapper">
+          <label class="sr-only" for="sort-select">Sort By</label>
+          <select
+            id="sort-select"
+            name="sort"
+            class="custom-select"
+            [(ngModel)]="sortBy"
+            (ngModelChange)="applyFilters()">
+            <option *ngFor="let s of sortOptions" [value]="s">{{ s }}</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">sort</span>
+        </div>
+      </div>
+
+      <div class="results-text">
+        Showing
+        <span class="results-bold">{{ displayedProducts.length }}</span> products
+      </div>
+    </div>
+  </section>
+
+  <section class="product-grid">
+    <article *ngFor="let product of displayedProducts" class="product-card">
+      <div class="card-image-wrapper">
+        <span
+          *ngIf="product.badge as b"
+          class="badge badge-top-left"
+          [ngClass]="
+            b.type === 'sale' ? 'badge-sale' : 'badge-primary'
+          "
+          >{{ b.text }}</span
+        >
+        <img
+          class="product-img"
+          [alt]="product.name"
+          [src]="product.image" />
+        <button type="button" class="btn btn-wishlist" aria-label="Add to wishlist">
+          <span class="material-symbols-outlined">favorite</span>
+        </button>
+        <div class="quick-view">
+          <button
+            type="button"
+            class="btn-quick-view btn-add-to-cart"
+            (click)="addToCart(product)">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="info-header">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <ng-container *ngIf="product.originalPrice; else singlePrice">
+            <div>
+              <span class="price price-sale">${{ product.price | number : '1.2-2' }}</span>
+              <span class="price-original"
+                >${{ product.originalPrice | number : '1.2-2' }}</span
+              >
+            </div>
+          </ng-container>
+          <ng-template #singlePrice>
+            <span class="price">${{ product.price | number : '1.2-2' }}</span>
+          </ng-template>
+        </div>
+        <p class="product-category">{{ product.category }}</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="load-more-section">
+    <button type="button" class="btn-load-more">
+      Load More Products
+      <span class="material-symbols-outlined">expand_more</span>
+    </button>
+  </section>
+</main>

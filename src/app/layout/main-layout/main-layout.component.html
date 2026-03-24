@@ -1,0 +1,100 @@
+<div class="overlay" [class.active]="menuOpen">
+  <span class="material-symbols-outlined close-menu" (click)="closeMenu()"
+    >close</span
+  >
+  <nav class="mobile-nav">
+    <a routerLink="/about" (click)="closeMenu()">About</a>
+    <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+    <a routerLink="/signin" (click)="closeMenu()">signin</a>
+    <a routerLink="/signup" (click)="closeMenu()">signup</a>
+  </nav>
+</div>
+
+<div class="container">
+  <header>
+    <div class="header-content">
+      <div class="header-inner">
+        <a class="home-link" routerLink="/"
+          ><div class="logo-container">
+            <div class="logo-icon">
+              <span class="material-symbols-outlined">landscape</span>
+            </div>
+            <h2 class="logo-text">Island Outdoor</h2>
+          </div></a
+        >
+
+        <nav class="desktop-nav">
+          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link" routerLink="/contact">Contact</a>
+          <a class="nav-link" routerLink="/signin">signin</a>
+          <a class="nav-link" routerLink="/signup">signup</a>
+        </nav>
+        <div class="header-actions">
+          <a routerLink="/cart" class="cart-button">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span class="cart-badge"></span>
+          </a>
+          <button type="button" class="menu-button" (click)="toggleMenu()">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="main-area">
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div>
+          <a class="home-link" routerLink="/"
+            ><div class="logo-container">
+              <div class="logo-icon">
+                <span class="material-symbols-outlined">landscape</span>
+              </div>
+              <h2 class="logo-text">Jamaican Outdoor Gear</h2>
+            </div></a
+          >
+          <p class="footer-description">
+            Equipping Jamaicans for the outdoors since 2010. Quality gear for
+            island life.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-section-title">Shop</h4>
+          <ul class="footer-links">
+            <li><a routerLink="/shop">Shop</a></li>
+            <li><a href="#">Camping</a></li>
+            <li><a href="#">Water Sports</a></li>
+            <li><a href="#">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-section-title">Company</h4>
+          <ul class="footer-links">
+            <li><a routerLink="/about">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Locations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-section-title">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a routerLink="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Island Outdoor All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#"><span class="sr-only">Facebook</span>FB</a>
+          <a href="#"><span class="sr-only">Instagram</span>IG</a>
+          <a href="#"><span class="sr-only">Twitter</span>TW</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

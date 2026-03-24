@@ -1,0 +1,208 @@
+<div class="page-wrapper">
+  <div class="layout-container">
+    <div class="content-wrapper">
+      <div class="layout-content">
+        <div class="page-header">
+          <h1 class="page-title">{{ cartTitle }}</h1>
+          <div class="shipping-notice">
+            <span class="material-symbols-outlined">local_shipping</span>
+            <p class="shipping-text">
+              You are
+              <span>${{ amountToFreeShipping | number : '1.2-2' }}</span> away
+              from
+              <span class="highlight">Free Shipping</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="cart-grid">
+          <div class="cart-items">
+            <div class="column-headers">
+              <div class="col-header-product">Product</div>
+              <div class="col-header-qty">Quantity</div>
+              <div class="col-header-price">Price</div>
+            </div>
+
+            <div *ngIf="!loading && cartItems.length === 0" class="empty-cart">
+              <span class="material-symbols-outlined">shopping_cart</span>
+              <h2>Your cart is empty</h2>
+              <p>Add some items to get started!</p>
+            </div>
+
+            <div
+              *ngFor="let item of cartItems; let i = index"
+              class="cart-item">
+              <div class="product-info">
+                <div
+                  class="product-image"
+                  [style.background-image]="'url(' + item.image + ')'"></div>
+                <div class="product-details">
+                  <h3 class="product-name">{{ item.name }}</h3>
+                  <p class="product-variant">{{ item.category }}</p>
+                  <span class="stock-badge in-stock">In Stock</span>
+                </div>
+              </div>
+
+              <div class="quantity-section">
+                <span class="mobile-label">Qty:</span>
+                <div class="quantity-control">
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    (click)="updateQuantity(i, -1)">
+                    <span class="material-symbols-outlined qty-icon"
+                      >remove</span
+                    >
+                  </button>
+                  <input
+                    class="qty-input"
+                    type="number"
+                    min="1"
+                    [value]="item.quantity"
+                    (change)="setQuantity(i, $any($event.target).value)" />
+                  <button
+                    type="button"
+                    class="qty-btn"
+                    (click)="updateQuantity(i, 1)">
+                    <span class="material-symbols-outlined qty-icon">add</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="price-section">
+                <span class="mobile-label">Price:</span>
+                <p class="price">
+                  ${{ item.price * item.quantity | number : '1.2-2' }}
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-remove"
+                  (click)="removeItem(item)">
+                  <span class="material-symbols-outlined">delete</span>
+                  <span class="remove-text">Remove</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <a class="continue-shopping" routerLink="/shop">
+                <span class="material-symbols-outlined">arrow_forward</span>
+                Continue Shopping
+              </a>
+            </div>
+          </div>
+
+          <div class="order-summary">
+            <div class="summary-card">
+              <h2 class="summary-title">Order Summary</h2>
+
+              <div class="summary-stack">
+                <div class="summary-row">
+                  <span>Subtotal</span>
+                  <span>${{ subtotal | number : '1.2-2' }}</span>
+                </div>
+                <div class="summary-row italic">
+                  <span>Shipping Estimate</span>
+                  <span>Calculated at checkout</span>
+                </div>
+                <div class="summary-row">
+                  <span>Tax Estimate</span>
+                  <span>${{ tax | number : '1.2-2' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-divider">
+                <div class="total-row">
+                  <span>Total</span>
+                  <span class="total-price">${{ total | number : '1.2-2' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-actions">
+                <div class="promo-row">
+                  <input
+                    class="promo-input"
+                    type="text"
+                    placeholder="Promo code" />
+                  <button type="button" class="btn btn-apply">Apply</button>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn-checkout"
+                  (click)="openCheckoutConfirm()">
+                  <span class="material-symbols-outlined">lock</span>
+                  Proceed to Checkout
+                </button>
+              </div>
+
+              <div class="secure-badge">
+                <div class="secure-row">
+                  <span class="material-symbols-outlined">verified_user</span>
+                  <span>Secure Checkout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal-overlay"
+  [class.active]="confirmOpen"
+  (click)="onConfirmBackdrop($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="success-icon confirm-icon">
+      <span class="material-symbols-outlined help-icon">help</span>
+    </div>
+    <h2>Ready to Checkout?</h2>
+    <p>Are you sure you want to proceed with your order?</p>
+    <div class="modal-buttons">
+      <button
+        type="button"
+        class="btn-modal btn-modal-primary"
+        (click)="confirmCheckout()">
+        Yes, Place Order
+      </button>
+      <button
+        type="button"
+        class="btn-modal btn-modal-secondary"
+        (click)="closeConfirm()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal-overlay"
+  [class.active]="successOpen"
+  (click)="onSuccessBackdrop($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="success-icon">
+      <span class="material-symbols-outlined">check_circle</span>
+    </div>
+    <h2>Order Placed Successfully!</h2>
+    <p>
+      Your order has been confirmed. We'll send you a confirmation email
+      shortly.
+    </p>
+    <div class="modal-buttons">
+      <button
+        type="button"
+        class="btn-modal btn-modal-primary"
+        (click)="continueShopping()">
+        Continue Shopping
+      </button>
+      <button
+        type="button"
+        class="btn-modal btn-modal-secondary"
+        (click)="closeSuccess()">
+        View Orders
+      </button>
+    </div>
+  </div>
+</div>
