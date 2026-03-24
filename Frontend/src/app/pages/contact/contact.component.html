@@ -1,4 +1,4 @@
-﻿<main
+<main
       class="flex-grow w-full max-w-[1120px] mx-auto px-4 md:px-8 py-8 md:py-12"
     >
       <!-- Breadcrumbs -->
@@ -134,7 +134,7 @@
             <h2 class="text-2xl font-bold mb-6 text-[#111813] dark:text-white">
               Send us a message
             </h2>
-            <form class="flex flex-col gap-6">
+              <form class="flex flex-col gap-6" (ngSubmit)="onSend()">
               <!-- Name Field -->
               <div class="flex flex-col gap-2">
                 <label
@@ -147,6 +147,8 @@
                   id="name"
                   placeholder="e.g. Usain Bolt"
                   type="text"
+                  [(ngModel)]="fullName"
+                  name="fullName"
                 />
               </div>
               <!-- Email Field -->
@@ -161,6 +163,8 @@
                   id="email"
                   placeholder="name@example.com"
                   type="email"
+                  [(ngModel)]="email"
+                  name="email"
                 />
               </div>
               <!-- Subject Dropdown -->
@@ -174,6 +178,8 @@
                   <select
                     class="w-full appearance-none rounded-lg bg-[#f9faf9] dark:bg-[#111813] border border-gray-200 dark:border-gray-700 px-4 py-3 text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-[#111813] dark:text-white pr-10"
                     id="subject"
+                    [(ngModel)]="subject"
+                    name="subject"
                   >
                     <option>General Inquiry</option>
                     <option>Order Status</option>
@@ -199,14 +205,17 @@
                   id="message"
                   placeholder="How can we help you gear up?"
                   rows="5"
+                  [(ngModel)]="message"
+                  name="message"
                 ></textarea>
               </div>
               <!-- Submit Button -->
               <button
-                class="mt-2 w-full bg-primary hover:bg-[#0fb839] text-[#052e16] font-bold text-lg py-4 rounded-lg transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2"
-                type="button"
+                class="mt-2 w-full bg-primary hover:bg-[#0fb839] text-[#052e16] font-bold text-lg py-4 rounded-lg transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2 disabled:opacity-60"
+                type="submit"
+                [disabled]="sending"
               >
-                <span>Send Message</span>
+                <span>{{ sending ? 'Sending…' : 'Send Message' }}</span>
                 <span class="material-symbols-outlined text-[20px]">send</span>
               </button>
             </form>

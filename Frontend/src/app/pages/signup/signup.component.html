@@ -90,8 +90,10 @@
             </label>
           </div>
 
-          <button class="btn-submit" type="submit">
-            <span>Create Account</span>
+          <div *ngIf="errorMsg" class="error-banner">{{ errorMsg }}</div>
+
+          <button class="btn-submit" type="submit" [disabled]="loading">
+            <span>{{ loading ? 'Creating Account…' : 'Create Account' }}</span>
           </button>
         </form>
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseCompatService } from '../../core/firebase-compat.service';
+import { ApiService } from '../../core/api.service';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +13,7 @@ export class SigninComponent {
   passwordVisible = false;
 
   constructor(
-    private readonly firebaseCompat: FirebaseCompatService,
+    private readonly api: ApiService,
     private readonly router: Router,
   ) {}
 
@@ -32,12 +32,16 @@ export class SigninComponent {
       return;
     }
     try {
-      const auth = this.firebaseCompat.auth();
-      await auth.signInWithEmailAndPassword(email, this.password);
+      const res = await this.api.signin(email, this.password).toPromise();
+      if (res) {
+        this.api.saveToken(res.token);
+      }
       alert('Login successful!');
       await this.router.navigateByUrl('/shop');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
+      const msg =
+        (err as any)?.error?.error ??
+        (err instanceof Error ? err.message : String(err));
       alert(msg);
     }
   }

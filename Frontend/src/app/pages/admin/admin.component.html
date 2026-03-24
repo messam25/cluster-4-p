@@ -1,0 +1,170 @@
+<div class="admin-root">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <span class="material-symbols-outlined">forest</span>
+      <span>JamGear Admin</span>
+    </div>
+    <a class="admin-back" routerLink="/shop">← Back to Shop</a>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-title-row">
+      <h1 class="admin-title">Product Management</h1>
+      <button class="btn-add" (click)="openAdd()">
+        <span class="material-symbols-outlined">add</span> Add Product
+      </button>
+    </div>
+
+    <!-- Alerts -->
+    <div *ngIf="errorMsg" class="alert alert-error">{{ errorMsg }}</div>
+    <div *ngIf="successMsg" class="alert alert-success">{{ successMsg }}</div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-state">
+      <span class="material-symbols-outlined spin">progress_activity</span>
+      Loading products…
+    </div>
+
+    <!-- ── Product Form Modal ────────────────────────────────────────────── -->
+    <div *ngIf="showForm" class="modal-backdrop" (click)="cancelForm()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>{{ editingId ? 'Edit Product' : 'Add New Product' }}</h2>
+          <button class="modal-close" (click)="cancelForm()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div *ngIf="errorMsg" class="alert alert-error">{{ errorMsg }}</div>
+
+          <div class="form-grid">
+            <!-- Name -->
+            <div class="form-group span-2">
+              <label>Product Name *</label>
+              <input type="text" [(ngModel)]="form.name" placeholder="e.g. Kingston Trekker" />
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <label>Category *</label>
+              <select [(ngModel)]="form.categoryId">
+                <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+              </select>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+              <label>Price (USD) *</label>
+              <input type="number" [(ngModel)]="form.price" min="0" step="0.01" />
+            </div>
+
+            <!-- Original Price -->
+            <div class="form-group">
+              <label>Original Price (optional)</label>
+              <input type="number" [(ngModel)]="form.originalPrice" min="0" step="0.01" placeholder="Leave blank if not on sale" />
+            </div>
+
+            <!-- Inventory -->
+            <div class="form-group">
+              <label>Inventory Qty</label>
+              <input type="number" [(ngModel)]="form.inventory" min="0" />
+            </div>
+
+            <!-- Image URL -->
+            <div class="form-group span-2">
+              <label>Image URL</label>
+              <input type="text" [(ngModel)]="form.image" placeholder="https://…" />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group span-2">
+              <label>Description</label>
+              <textarea [(ngModel)]="form.description" rows="2" placeholder="Short product description"></textarea>
+            </div>
+
+            <!-- Badge -->
+            <div class="form-group">
+              <label>Badge Text</label>
+              <input type="text" [(ngModel)]="form.badgeText" placeholder="e.g. Best Seller" />
+            </div>
+            <div class="form-group">
+              <label>Badge Type</label>
+              <select [(ngModel)]="form.badgeType">
+                <option value="">None</option>
+                <option value="primary">Primary</option>
+                <option value="sale">Sale</option>
+              </select>
+            </div>
+
+            <!-- Active toggle -->
+            <div class="form-group span-2 checkbox-row">
+              <input type="checkbox" id="isActive" [(ngModel)]="form.isActive" />
+              <label for="isActive">Active (visible to shoppers)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="cancelForm()">Cancel</button>
+          <button class="btn-save" (click)="saveProduct()" [disabled]="saving">
+            {{ saving ? 'Saving…' : (editingId ? 'Save Changes' : 'Add Product') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Product Table ──────────────────────────────────────────────────── -->
+    <div *ngIf="!loading" class="table-wrapper">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="products.length === 0">
+            <td colspan="7" class="empty-row">No products found.</td>
+          </tr>
+          <tr *ngFor="let p of products" [class.inactive-row]="!p.isActive">
+            <td>
+              <img *ngIf="p.image" [src]="p.image" [alt]="p.name" class="product-thumb" />
+              <span *ngIf="!p.image" class="no-image">—</span>
+            </td>
+            <td>
+              <div class="product-name">{{ p.name }}</div>
+              <div *ngIf="p.badgeText" class="badge" [class.badge-sale]="p.badgeType === 'sale'">{{ p.badgeText }}</div>
+            </td>
+            <td>{{ p.category }}</td>
+            <td>
+              <span class="price">${{ p.price | number:'1.2-2' }}</span>
+              <span *ngIf="p.originalPrice" class="original-price">${{ p.originalPrice | number:'1.2-2' }}</span>
+            </td>
+            <td [class.low-stock]="p.inventory < 5">{{ p.inventory }}</td>
+            <td>
+              <span class="status-pill" [class.status-active]="p.isActive" [class.status-inactive]="!p.isActive">
+                {{ p.isActive ? 'Active' : 'Hidden' }}
+              </span>
+            </td>
+            <td class="action-cell">
+              <button class="btn-edit" (click)="openEdit(p)" title="Edit">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+              <button class="btn-delete" (click)="deleteProduct(p)" title="Delete">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

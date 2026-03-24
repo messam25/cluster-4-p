@@ -1,0 +1,15 @@
+.error-banner {
+  background: #fdecea;
+  color: #c0392b;
+  border-left: 4px solid #e74c3c;
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

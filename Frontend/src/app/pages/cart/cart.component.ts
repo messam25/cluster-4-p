@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseCompatService } from '../../core/firebase-compat.service';
+import { ApiService, CartItem } from '../../core/api.service';
 
 export interface CartLine {
   id: string;
@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
   successOpen = false;
 
   constructor(
-    private readonly firebaseCompat: FirebaseCompatService,
+    private readonly api: ApiService,
     private readonly router: Router,
   ) {}
 
@@ -55,23 +55,15 @@ export class CartComponent implements OnInit {
   async loadCartItems(): Promise<void> {
     this.loading = true;
     try {
-      const db = this.firebaseCompat.firestore();
-      const snapshot = await db
-        .collection('cart')
-        .orderBy('addedAt', 'desc')
-        .get();
-      this.cartItems = [];
-      snapshot.forEach((doc: { id: string; data: () => Record<string, unknown> }) => {
-        const d = doc.data();
-        this.cartItems.push({
-          id: doc.id,
-          name: String(d['name'] ?? ''),
-          price: Number(d['price'] ?? 0),
-          category: String(d['category'] ?? ''),
-          image: String(d['image'] ?? ''),
-          quantity: 1,
-        });
-      });
+      const items: CartItem[] = (await this.api.getCart().toPromise()) ?? [];
+      this.cartItems = items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        category: item.category,
+        image: item.image,
+        quantity: item.quantity ?? 1,
+      }));
     } catch (e) {
       console.error(e);
       this.cartItems = [];
@@ -100,8 +92,7 @@ export class CartComponent implements OnInit {
       return;
     }
     try {
-      const db = this.firebaseCompat.firestore();
-      await db.collection('cart').doc(item.id).delete();
+      await this.api.removeCartItem(item.id).toPromise();
       alert(`"${item.name}" removed from cart`);
       await this.loadCartItems();
     } catch (e) {
@@ -152,12 +143,7 @@ export class CartComponent implements OnInit {
     }, 300);
 
     try {
-      const db = this.firebaseCompat.firestore();
-      const batch = db.batch();
-      this.cartItems.forEach((item) => {
-        batch.delete(db.collection('cart').doc(item.id));
-      });
-      await batch.commit();
+      await this.api.checkoutCart().toPromise();
       this.cartItems = [];
     } catch (e) {
       console.error(e);
