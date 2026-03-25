@@ -1,115 +1,100 @@
-<main class="container main-content">
-  <section class="page-header">
-    <div class="header-text">
-      <h1 class="page-title">All Gear</h1>
-      <p class="page-subtitle">
-        Premium outdoor equipment designed for the island life.
+<main class="container main-content-refined">
+  <div class="mesh-gradient"></div>
+  <section class="shop-hero">
+    <div class="hero-content">
+      <span class="eyebrow">Professional Gear</span>
+      <h1 class="page-title-modern">Explore the Unseen</h1>
+      <p class="page-subtitle-modern">
+        High-performance equipment for Jamaica's most demanding terrains.
       </p>
     </div>
   </section>
 
-  <section class="filters-section">
-    <div class="filters-row">
-      <div class="filters-group">
-        <div class="select-wrapper">
-          <label class="sr-only" for="category-select">Category</label>
-          <select
-            id="category-select"
-            name="category"
-            class="custom-select"
-            [(ngModel)]="selectedCategory"
-            (ngModelChange)="applyFilters()">
-            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
-        </div>
-
-        <div class="select-wrapper">
-          <label class="sr-only" for="sort-select">Sort By</label>
-          <select
-            id="sort-select"
-            name="sort"
-            class="custom-select"
-            [(ngModel)]="sortBy"
-            (ngModelChange)="applyFilters()">
-            <option *ngFor="let s of sortOptions" [value]="s">{{ s }}</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">sort</span>
-        </div>
-
-        <div class="search-wrapper" style="margin-left: 1rem;">
-          <label class="sr-only" for="search-input">Search Gear</label>
-          <input
-            id="search-input"
-            type="text"
-            aria-label="Search Gear"
-            placeholder="Search gear..."
-            class="custom-input"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="applyFilters()"
-            style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; outline: none;"
-          />
-        </div>
+  <section class="filters-glass">
+    <div class="filters-row-modern">
+      <div class="search-bar-modern">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="What Gear do you need?"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="applyFilters()"
+        />
       </div>
 
-      <div class="results-text" aria-live="polite" aria-atomic="true">
-        Showing
-        <span class="results-bold">{{ displayedProducts.length }}</span> products
+      <div class="controls-modern">
+        <div class="control-item">
+          <label for="category-select">Category</label>
+          <select id="category-select" [(ngModel)]="selectedCategory" (ngModelChange)="applyFilters()">
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+
+        <div class="control-item">
+          <label for="sort-select">Sort</label>
+          <select id="sort-select" [(ngModel)]="sortBy" (ngModelChange)="applyFilters()">
+            <option *ngFor="let s of sortOptions" [value]="s">{{ s }}</option>
+          </select>
+        </div>
       </div>
     </div>
   </section>
 
+  <div class="results-meta">
+    Showing <span class="count">{{ displayedProducts.length }}</span> items found
+  </div>
+
   <section class="product-grid">
     <h2 class="sr-only">Product List</h2>
-    <article *ngFor="let product of displayedProducts" class="product-card">
+    <article *ngFor="let product of displayedProducts; let i = index" 
+             class="product-card" 
+             [style.animation-delay]="i * 0.1 + 's'">
+      
       <div class="card-image-wrapper">
-        <span
-          *ngIf="product.badge as b"
-          class="badge badge-top-left"
-          [ngClass]="
-            b.type === 'sale' ? 'badge-sale' : 'badge-primary'
-          "
-          >{{ b.text }}</span
-        >
+        <span *ngIf="product.badge as b" 
+              class="badge" 
+              [ngClass]="b.type === 'sale' ? 'badge-sale' : 'badge-primary'">
+          {{ b.text }}
+        </span>
+        
         <a [routerLink]="['/product', product.id]" class="product-link">
-          <img
-            class="product-img"
-            width="400"
-            height="400"
-            [alt]="product.name"
-            [ngSrc]="product.image" />
+          <img 
+            class="product-img" 
+            width="400" 
+            height="400" 
+            [alt]="product.name" 
+            [ngSrc]="product.image"
+            [priority]="i < 2"
+          />
         </a>
-        <button type="button" class="btn btn-wishlist" aria-label="Add to wishlist">
+
+        <button type="button" class="btn-wishlist" aria-label="Add to wishlist">
           <span class="material-symbols-outlined">favorite</span>
         </button>
+
         <div class="quick-view">
-          <button
-            type="button"
-            class="btn-quick-view btn-add-to-cart"
-            (click)="addToCart(product)">
+          <button type="button" class="btn-quick-view" (click)="addToCart(product)">
             <span class="material-symbols-outlined">shopping_cart</span>
-            Add to Cart
+            Add to Bag
           </button>
         </div>
       </div>
+
       <div class="product-info">
-        <div class="info-header">
-          <h3 class="product-name">
-            <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
-          </h3>
-          <ng-container *ngIf="product.originalPrice; else singlePrice">
-            <div>
-              <span class="price price-sale">${{ product.price | number : '1.2-2' }}</span>
-              <span class="price-original"
-                >${{ product.originalPrice | number : '1.2-2' }}</span
-              >
-            </div>
-          </ng-container>
-          <ng-template #singlePrice>
-            <span class="price">${{ product.price | number : '1.2-2' }}</span>
-          </ng-template>
-        </div>
         <p class="product-category">{{ product.category }}</p>
+        <h3 class="product-name">
+          <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
+        </h3>
+        
+        <div class="price-container">
+          <span class="price" [class.price-sale]="!!product.originalPrice">
+            ${{ product.price | number : '1.2-2' }}
+          </span>
+          <span *ngIf="product.originalPrice" class="price-original">
+            ${{ product.originalPrice | number : '1.2-2' }}
+          </span>
+        </div>
       </div>
     </article>
   </section>

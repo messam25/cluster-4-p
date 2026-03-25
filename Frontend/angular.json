@@ -20,15 +20,11 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
-              "src/assets/about-page.css",
-              "src/assets/contact-page.css",
-              "src/assets/shop-page.css",
-              "src/assets/cart-page.css",
-              "src/assets/signin-page.css",
-              "src/assets/signup-page.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -99,15 +95,11 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
-              "src/assets/about-page.css",
-              "src/assets/contact-page.css",
-              "src/assets/shop-page.css",
-              "src/assets/cart-page.css",
-              "src/assets/signin-page.css",
-              "src/assets/signup-page.css",
               "src/styles.css"
             ],
             "scripts": []

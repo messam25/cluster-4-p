@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface AuthResponse {
@@ -41,12 +41,19 @@ const TOKEN_KEY = 'jg_token';
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly base = environment.apiUrl;
+  private authStatus = new BehaviorSubject<boolean>(this.hasToken());
+  authStatus$ = this.authStatus.asObservable();
 
   constructor(private readonly http: HttpClient) {}
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem(TOKEN_KEY);
+  }
 
   // ── Token helpers ─────────────────────────────────────────────────────────
   saveToken(token: string): void {
     localStorage.setItem(TOKEN_KEY, token);
+    this.authStatus.next(true);
   }
 
   getToken(): string | null {
@@ -55,6 +62,7 @@ export class ApiService {
 
   clearToken(): void {
     localStorage.removeItem(TOKEN_KEY);
+    this.authStatus.next(false);
   }
 
   private authHeaders(): HttpHeaders {

@@ -1,11 +1,13 @@
 <div class="signup-root">
   <header class="site-header">
-    <div class="logo-section">
-      <div class="logo-icon">
-        <span class="material-symbols-outlined">landscape</span>
+    <a class="home-link" routerLink="/" aria-label="Island Outdoor Home">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <span class="material-symbols-outlined">landscape</span>
+        </div>
+        <h2 class="brand-name">Island Outdoor</h2>
       </div>
-      <h2 class="brand-name">JamGear Outdoor</h2>
-    </div>
+    </a>
     <div class="nav-section">
       <nav class="main-nav">
         <a class="nav-link" routerLink="/">Home</a>
@@ -85,8 +87,8 @@
                 [(ngModel)]="termsAccepted" />
             </div>
             <label class="checkbox-label" for="terms">
-              I agree to the <a href="#">Terms of Service</a> and
-              <a href="#">Privacy Policy</a>.
+              I agree to the <a routerLink="/privacy">Terms of Service</a> and
+              <a routerLink="/privacy">Privacy Policy</a>.
             </label>
           </div>
 
@@ -114,6 +116,6 @@
       <span class="material-symbols-outlined">camping</span>
       <span class="material-symbols-outlined">surfing</span>
     </div>
-    <p class="footer-text">© 2024 JamGear Outdoor - Built for the Island</p>
+    <p class="footer-text">© 2026 Island Outdoor - Built for the Island</p>
   </footer>
 </div>

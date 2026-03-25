@@ -1,1 +1,59 @@
-<p>blog works!</p>
+<div class="blog-page">
+  <section class="blog-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Island Stories</h1>
+      <p class="hero-subtitle">Insights, guides, and tales from the heart of the Caribbean wilderness.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Featured Post -->
+    <div class="featured-post" *ngIf="posts.length > 0">
+      <div class="featured-image" [style.background-image]="'url(' + posts[0].image + ')'"></div>
+      <div class="featured-details">
+        <span class="category-tag">{{ posts[0].category }}</span>
+        <h2 class="featured-title">{{ posts[0].title }}</h2>
+        <p class="featured-excerpt">{{ posts[0].excerpt }}</p>
+        <div class="post-meta">
+          <span class="author">{{ posts[0].author }}</span>
+          <span class="dot">•</span>
+          <span class="date">{{ posts[0].date }}</span>
+          <span class="dot">•</span>
+          <span class="read-time">{{ posts[0].readTime }}</span>
+        </div>
+        <button class="btn-read-more">Read Full Story</button>
+      </div>
+    </div>
+
+    <!-- Recent Posts Grid -->
+    <div class="posts-grid">
+      <div *ngFor="let post of posts.slice(1)" class="post-card">
+        <div class="post-card-image" [style.background-image]="'url(' + post.image + ')'">
+          <span class="category-tag">{{ post.category }}</span>
+        </div>
+        <div class="post-card-content">
+          <h3 class="post-card-title">{{ post.title }}</h3>
+          <p class="post-card-excerpt">{{ post.excerpt }}</p>
+          <div class="post-meta">
+            <span class="date">{{ post.date }}</span>
+            <span class="dot">•</span>
+            <span class="read-time">{{ post.readTime }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="blog-newsletter">
+      <div class="newsletter-inner">
+        <h2>Join the Adventure</h2>
+        <p>Get the latest gear reviews and trail guides delivered to your inbox.</p>
+        <form class="newsletter-form" (submit)="$event.preventDefault()">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

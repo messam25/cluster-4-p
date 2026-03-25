@@ -6,7 +6,7 @@
             style="
               background-image:
                 linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-                url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAvnmZJ2UD6y1nPCPUiXqeF6btfdd2uAo8BVyiCkxrv1sf8sOKMaOSOBjuWEAGSZlH3PxQQz-FmoPsTLRUu7W9IyVeLbr0rBCL7eISeyBImjtdGOm5MQcdP0lcYJCtTB-rc9kx-YBQYZD4mDMRCTOCSvZr--6EBZlfereU5ffABxMhNSTSQ1tWPOjlA4N81wmgsdBNDkEmQT8Oa_BOBQlB4gHNbLT3q5G7LiV6CJHeTqA25F1bXIrzvZPAI0h-326EoqYQ97R94eBpf&quot;);
+                url('assets/images/about-mount-kailash-desktop-65bde5999cc6d325323cfc91-28723225.webp');
             ">
             <div class="hero-content">
               <h1 class="hero-title">Explore the Rock</h1>
@@ -25,14 +25,14 @@
         <section class="section py-12">
           <div class="section-header">
             <h2 class="section-title">Shop by Category</h2>
-            <a class="view-all-link" href="#" aria-label="View All Categories">
+            <a class="view-all-link" routerLink="/shop" aria-label="View all categories in shop">
               View Categories
               <span class="material-symbols-outlined">chevron_right</span>
             </a>
           </div>
           <div class="grid grid-cols-1 md-cols-3 lg-gap-6">
             <!-- Hiking -->
-            <a class="category-card" href="#">
+            <a class="category-card" routerLink="/shop">
               <div
                 class="category-image"
                 style="
@@ -45,7 +45,7 @@
               </div>
             </a>
             <!-- Camping -->
-            <a class="category-card" href="#">
+            <a class="category-card" routerLink="/shop">
               <div
                 class="category-image"
                 style="
@@ -58,7 +58,7 @@
               </div>
             </a>
             <!-- Beach -->
-            <a class="category-card" href="#">
+            <a class="category-card" routerLink="/shop">
               <div
                 class="category-image"
                 style="
@@ -86,6 +86,8 @@
                   class="product-image"
                   width="400"
                   height="400"
+                  loading="lazy"
+                  decoding="async"
                   ngSrc="https://lh3.googleusercontent.com/aida-public/AB6AXuBaPAFoM4QiVbuUl26x40nKAhogK8fWfPLzaWH09A311Djhs82ABE6piq3e99BO_nWeHmVD_miI4MFK3Wr_rjnUx99V35xlUlQ6xZUe-4C__fRzTnbtrhyeBaKhOQLgmanpvgZBQj20x9Y3eoP7XBCKyVpd1hOxpKLRCFPHCJq-qGXNXmkCyQukMl4J47qZ0odV8O2PH3vLphyxIpPqmxHlrm7_vVffcY388YbglgLv_gBgkoIZNX2WAr-EoauSoQ0Ng1PFClxMv6g8" />
                 <button class="favorite-button" aria-label="Add to Favorites">
                   <span class="material-symbols-outlined">favorite</span>
@@ -112,6 +114,8 @@
                   class="product-image"
                   width="400"
                   height="400"
+                  loading="lazy"
+                  decoding="async"
                   ngSrc="https://lh3.googleusercontent.com/aida-public/AB6AXuCp3dqWqKP9nTN9V7mnKwmjUwZJ67-t-8x93UGgYMJqExSM6VQQ7LnJW-BZDnvI_v_fpidUU-Kri3DgCcGR_7PwW-KVz9POTTgwGYq_CVEZ3saGvYVKfXBKD08_iE_9vlU5uvDTN2F7NDLRz7BgXlgicVfcbvJItzcEyhTNkOrv7pxe5M3a2X9mTNsB0Ubv0ZPEM0-EMW5BCQraXAzB_kEZHi97h-Yp1cgChW8mYx7sl-L0R_VwO2cBGCpGUR7umIGvxayR4NOC7tNT" />
                 <button class="favorite-button" aria-label="Add to Favorites">
                   <span class="material-symbols-outlined">favorite</span>
@@ -138,6 +142,8 @@
                   class="product-image"
                   width="400"
                   height="400"
+                  loading="lazy"
+                  decoding="async"
                   ngSrc="https://lh3.googleusercontent.com/aida-public/AB6AXuDSsKjVZvSEEOKxmsdrI9scG2N07KKkkQ-F-PNU4Dbo0T1CZNCaJE246kkA0mkYDPxPKbw1ry_ovRdY34O6wILmh94VSGN19EyM_HbrEARwzdjUn10CK3sM0k4gRHrmAyckzaq74ug7Yo4sWh_B0_0_lukuPW7gre7KmpChtwaJDIkI1Ejha2iE9IQr2FFQwwvWSy42_tDH-bj8qcbfx02Fwk9gQrCMWEiuIG0uckvdrdM0-Wb3C7gK8Mnn2dAZNfDzLKKmrPTcIUo0" />
                 <button class="favorite-button" aria-label="Add to Favorites">
                   <span class="material-symbols-outlined">favorite</span>
@@ -164,6 +170,8 @@
                   class="product-image"
                   width="400"
                   height="400"
+                  loading="lazy"
+                  decoding="async"
                   ngSrc="https://lh3.googleusercontent.com/aida-public/AB6AXuBi705yo0g4I2ux-pBuKnD58V5f0z8AVLhdhaul6YcYqFqbxl5567hI7Imj82ALCtcbvIdfSLCbaE1x7hZlDyLojSiK7R3lBfOh-br66l0p6yHYsntlqJsh_X8YiTx7hwkMB7kaEW7LqliWbtUeaemVvWNnlQJlND8qqZSDsNiUiq0h29gAj_Rx6mIaVhkaXYocv95oX5BWsqmQrG-wNyXgsWi_N2pq24v7u9K6zjwZgdDTa6Cvwew0UwHvogdd5oXg-jWGM11FgCZr" />
                 <button class="favorite-button" aria-label="Add to Favorites">
                   <span class="material-symbols-outlined">favorite</span>

@@ -5,3 +5,23 @@ a.cart-button {
   align-items: center;
   justify-content: center;
 }
+
+.btn-logout-nav {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.btn-logout-nav:hover {
+  background: rgba(0,0,0,0.05);
+  color: #ef4444;
+}
+
+.logout-link {
+  cursor: pointer;
+}

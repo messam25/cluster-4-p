@@ -7,33 +7,44 @@
     <a routerLink="/about" (click)="closeMenu()">About</a>
     <a routerLink="/contact" (click)="closeMenu()">Contact</a>
     <a routerLink="/blog" (click)="closeMenu()">Blog</a>
-    <a routerLink="/signin" (click)="closeMenu()">Sign In</a>
-    <a routerLink="/signup" (click)="closeMenu()">Sign Up</a>
+    <ng-container *ngIf="isLoggedIn$ | async; else authMobile">
+      <a routerLink="/profile" (click)="closeMenu()">Profile</a>
+      <button type="button" (click)="logout()" class="logout-link">Logout</button>
+    </ng-container>
+    <ng-template #authMobile>
+      <a routerLink="/signin" (click)="closeMenu()">Sign In</a>
+      <a routerLink="/signup" (click)="closeMenu()">Sign Up</a>
+    </ng-template>
   </nav>
 </div>
 
-<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <div class="container">
   <header>
     <div class="header-content">
       <div class="header-inner">
-        <a class="home-link" routerLink="/"
-          ><div class="logo-container">
+        <a class="home-link" routerLink="/" aria-label="Island Outdoor Home">
+          <div class="logo-container">
             <div class="logo-icon">
               <span class="material-symbols-outlined">landscape</span>
             </div>
             <span class="logo-text">Island Outdoor</span>
-          </div></a
-        >
+          </div>
+        </a>
 
         <nav class="desktop-nav" aria-label="Main Navigation">
           <a class="nav-link" routerLink="/shop">Shop</a>
           <a class="nav-link" routerLink="/about">About</a>
           <a class="nav-link" routerLink="/contact">Contact</a>
           <a class="nav-link" routerLink="/blog">Blog</a>
-          <a class="nav-link" routerLink="/signin">Sign In</a>
-          <a class="nav-link" routerLink="/signup">Sign Up</a>
+          <ng-container *ngIf="isLoggedIn$ | async; else authDesktop">
+            <button class="btn-logout-nav" (click)="logout()">Logout</button>
+          </ng-container>
+          <ng-template #authDesktop>
+            <a class="nav-link" routerLink="/signin">Sign In</a>
+            <a class="nav-link" routerLink="/signup">Sign Up</a>
+          </ng-template>
         </nav>
         <div class="header-actions">
           <a routerLink="/cart" class="cart-button" aria-label="View Cart">
@@ -53,53 +64,64 @@
   <footer>
     <div class="footer-content">
       <div class="footer-grid">
-        <div>
-          <a class="home-link" routerLink="/"
-            ><div class="logo-container">
+        <div class="footer-brand-section">
+          <a class="home-link" routerLink="/">
+            <div class="logo-container">
               <div class="logo-icon">
                 <span class="material-symbols-outlined">landscape</span>
               </div>
-              <span class="logo-text">Jamaican Outdoor Gear</span>
-            </div></a
-          >
+              <span class="logo-text" style="color: white;">Island Outdoor</span>
+            </div>
+          </a>
           <p class="footer-description">
-            Equipping Jamaicans for the outdoors since 2010. Quality gear for
-            island life.
+            Premium gear for the tropical explorer. Designed for the island, built for the world.
           </p>
         </div>
+
         <div>
-          <h2 class="footer-section-title">Shop</h2>
+          <h2 class="footer-section-title">Shop Explore</h2>
           <ul class="footer-links">
-            <li><a routerLink="/shop">Shop</a></li>
-            <li><a href="#">Camping</a></li>
-            <li><a href="#">Water Sports</a></li>
-            <li><a href="#">New Arrivals</a></li>
+            <li><a routerLink="/shop">All Gear</a></li>
+            <li><a routerLink="/shop">New Arrivals</a></li>
+            <li><a routerLink="/shop">Bestsellers</a></li>
+            <li><a routerLink="/shop">Special Offers</a></li>
           </ul>
         </div>
+
         <div>
-          <h2 class="footer-section-title">Company</h2>
+          <h2 class="footer-section-title">Useful Links</h2>
           <ul class="footer-links">
-            <li><a routerLink="/about">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Locations</a></li>
+            <li><a routerLink="/about">Our Story</a></li>
+            <li><a routerLink="/contact">Contact Support</a></li>
+            <li><a routerLink="/privacy">Privacy Policy</a></li>
+            <li><a routerLink="/privacy">Terms of Use</a></li>
           </ul>
         </div>
-        <div>
-          <h2 class="footer-section-title">Support</h2>
-          <ul class="footer-links">
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns</a></li>
-            <li><a routerLink="/contact">Contact Us</a></li>
-            <li><a routerLink="/privacy">Privacy Notice</a></li>
-          </ul>
+
+        <div class="footer-newsletter">
+          <h2 class="footer-section-title">Newsletter</h2>
+          <p class="footer-description" style="max-width: 100%;">Get the latest gear drops and island stories.</p>
+          <form class="newsletter-form" (submit)="$event.preventDefault()">
+            <input type="email" placeholder="Email Address" aria-label="Email Address" />
+            <button type="submit">Join</button>
+          </form>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-copyright">© 2026 Island Outdoor All rights reserved.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copyright">© 2026 Island Outdoor. Crafted for the Caribbean.</p>
         <div class="footer-social">
-          <a href="#"><span class="sr-only">Facebook</span><span aria-hidden="true">FB</span></a>
-          <a href="#"><span class="sr-only">Instagram</span><span aria-hidden="true">IG</span></a>
-          <a href="#"><span class="sr-only">Twitter</span><span aria-hidden="true">TW</span></a>
+          <a href="https://www.facebook.com/islandoutdoor" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <span class="material-symbols-outlined">public</span>
+          </a>
+          <a href="https://www.instagram.com/islandoutdoor" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <span class="material-symbols-outlined">camera</span>
+          </a>
+          <a href="https://x.com/islandoutdoor" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <span class="material-symbols-outlined">alternate_email</span>
+          </a>
         </div>
       </div>
     </div>
