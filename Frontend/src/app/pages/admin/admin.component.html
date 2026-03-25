@@ -136,7 +136,7 @@
           </tr>
           <tr *ngFor="let p of products" [class.inactive-row]="!p.isActive">
             <td>
-              <img *ngIf="p.image" [src]="p.image" [alt]="p.name" class="product-thumb" />
+              <img *ngIf="p.image" [ngSrc]="p.image" [alt]="p.name" width="50" height="50" class="product-thumb" />
               <span *ngIf="!p.image" class="no-image">—</span>
             </td>
             <td>

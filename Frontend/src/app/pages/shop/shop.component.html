@@ -42,6 +42,7 @@
           <input
             id="search-input"
             type="text"
+            aria-label="Search Gear"
             placeholder="Search gear..."
             class="custom-input"
             [(ngModel)]="searchTerm"
@@ -59,6 +60,7 @@
   </section>
 
   <section class="product-grid">
+    <h2 class="sr-only">Product List</h2>
     <article *ngFor="let product of displayedProducts" class="product-card">
       <div class="card-image-wrapper">
         <span
@@ -69,10 +71,14 @@
           "
           >{{ b.text }}</span
         >
-        <img
-          class="product-img"
-          [alt]="product.name"
-          [src]="product.image" />
+        <a [routerLink]="['/product', product.id]" class="product-link">
+          <img
+            class="product-img"
+            width="400"
+            height="400"
+            [alt]="product.name"
+            [ngSrc]="product.image" />
+        </a>
         <button type="button" class="btn btn-wishlist" aria-label="Add to wishlist">
           <span class="material-symbols-outlined">favorite</span>
         </button>
@@ -88,7 +94,9 @@
       </div>
       <div class="product-info">
         <div class="info-header">
-          <h3 class="product-name">{{ product.name }}</h3>
+          <h3 class="product-name">
+            <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
+          </h3>
           <ng-container *ngIf="product.originalPrice; else singlePrice">
             <div>
               <span class="price price-sale">${{ product.price | number : '1.2-2' }}</span>

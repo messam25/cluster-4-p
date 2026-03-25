@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService, Product } from '../../core/api.service';
 
 export interface ShopProduct {
+  id: number;
   name: string;
   price: number;
   category: string;
@@ -147,6 +148,7 @@ export class ShopComponent implements OnInit {
         }
         
         const newProduct: ShopProduct = {
+          id: i + 1000, // Temporary ID for XML products
           name, category, price, image, badge,
           originalPrice: originalPriceText ? parseFloat(originalPriceText) : undefined
         };

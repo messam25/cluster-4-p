@@ -19,7 +19,9 @@ export interface CartItem {
 }
 
 export interface Product {
+  id: number;
   name: string;
+  description?: string;
   price: number;
   category: string;
   image: string;
@@ -86,6 +88,10 @@ export class ApiService {
       params = params.set('sort', sort);
     }
     return this.http.get<Product[]>(`${this.base}/api/products`, { params });
+  }
+
+  getProduct(id: string | number): Observable<Product> {
+    return this.http.get<Product>(`${this.base}/api/products/${id}`);
   }
 
   // ── Cart ──────────────────────────────────────────────────────────────────

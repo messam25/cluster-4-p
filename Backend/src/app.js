@@ -31,6 +31,9 @@ app.use(morgan('dev'));
 // ─── Body parsing ─────────────────────────────────────────────────────────────
 app.use(express.json());
 
+// ─── Static files (Uploads) ──────────────────────────────────────────────────
+app.use('/uploads', express.static('uploads'));
+
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 

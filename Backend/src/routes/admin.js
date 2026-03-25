@@ -5,6 +5,24 @@ const { body } = require('express-validator');
 const pool = require('../db');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
+const multer = require('multer');
+const path = require('path');
+
+// 🖼️ Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    // Generate a unique filename using timestamp and original extension
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
 
 const router = Router();
 
@@ -52,11 +70,11 @@ router.get('/categories', auth, async (req, res, next) => {
 router.post(
   '/products',
   auth,
+  upload.single('image'), // Handle single file upload with field name 'image'
   [
     body('name').trim().notEmpty().withMessage('Name is required.'),
     body('price').isFloat({ min: 0 }).withMessage('Price must be >= 0.'),
     body('categoryId').isInt({ min: 1 }).withMessage('Valid category is required.'),
-    body('image').optional().trim(),
     body('description').optional().trim(),
     body('originalPrice').optional({ nullable: true }).isFloat({ min: 0 }),
     body('inventory').optional().isInt({ min: 0 }),
@@ -70,13 +88,15 @@ router.post(
         name,
         price,
         categoryId,
-        image = null,
         description = null,
         originalPrice = null,
         inventory = 0,
         badgeText = null,
         badgeType = null,
       } = req.body;
+
+      // Use uploaded file path if available, otherwise use a default or null
+      const image_url = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : null;
 
       // Auto-generate slug from name
       const slug = name
@@ -89,7 +109,7 @@ router.post(
            (category_id, name, slug, description, image_url, price, original_price,
             badge_text, badge_type, inventory_qty, is_active)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
-        [categoryId, name, slug, description, image, price, originalPrice,
+        [categoryId, name, slug, description, image_url, price, originalPrice,
          badgeText || null, badgeType || null, inventory]
       );
 

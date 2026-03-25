@@ -23,6 +23,12 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/about-page.css",
+              "src/assets/contact-page.css",
+              "src/assets/shop-page.css",
+              "src/assets/cart-page.css",
+              "src/assets/signin-page.css",
+              "src/assets/signup-page.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -47,6 +53,12 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "optimization": true,
+              "buildOptimizer": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
               "outputHashing": "all"
             },
             "development": {
@@ -90,6 +102,12 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/about-page.css",
+              "src/assets/contact-page.css",
+              "src/assets/shop-page.css",
+              "src/assets/cart-page.css",
+              "src/assets/signin-page.css",
+              "src/assets/signup-page.css",
               "src/styles.css"
             ],
             "scripts": []

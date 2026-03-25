@@ -1,10 +1,4 @@
-@import url('assets/about-page.css');
-@import url('assets/contact-page.css');
-@import url('assets/shop-page.css');
-@import url('assets/cart-page.css');
-@import url('assets/signin-page.css');
-@import url('assets/signup-page.css');
-
+/* Removed render-blocking imports -- now handled efficiently by angular.json bundling */
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -654,7 +648,7 @@ main {
 
 .add-to-cart-button {
   background-color: rgba(17, 212, 66, 0.1);
-  color: #11d442;
+  color: #15803d; /* Changed from #11d442 for AAA WCAG color contrast */
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: none;

@@ -16,6 +16,8 @@ const pool = require('./db');
 
 const PORT = process.env.PORT || 3000;
 
+const initializeDatabase = require('./init-db');
+
 // ─── TLS / HTTPS Setup (Practical Assessment Note) ─────────────────────────
 // In production (Vercel, Heroku, etc.), HTTPS/TLS is handled at the edge/proxy level.
 // If running locally, you could use a self-signed cert and the built-in 'https' module:
@@ -26,16 +28,17 @@ const PORT = process.env.PORT || 3000;
 // HTTPS encrypts data in-transit using TLS to prevent eavesdropping and MITM attacks.
 
 // ─── Test DB connection before accepting requests ─────────────────────────────
-pool.getConnection()
+initializeDatabase()
+  .then(() => pool.getConnection())
   .then((conn) => {
     conn.release();
-    console.log(`[server] MySQL connected → ${process.env.DB_USER}@${process.env.DB_HOST}/${process.env.DB_NAME}`);
+    console.log(`[server] MySQL query pool connected → ${process.env.DB_USER}@${process.env.DB_HOST}/${process.env.DB_NAME}`);
     app.listen(PORT, () => {
       console.log(`[server] Island Outdoor API listening on http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
-    console.error('[server] ❌ Cannot connect to MySQL. Check your DB_* variables in Backend/.env');
+    console.error('[server] ❌ Cannot start the server or connect to MySQL. Check your DB_* variables in Backend/.env');
     console.error(`[server]    ${err.message}`);
     process.exit(1);
   });

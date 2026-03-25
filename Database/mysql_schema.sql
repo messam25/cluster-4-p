@@ -195,34 +195,34 @@ INSERT INTO products (
 SELECT c.category_id, p.name, p.slug, p.description, p.image_url, p.price, p.original_price, p.badge_text, p.badge_type, p.inventory_qty
 FROM (
   SELECT 'Hiking & Camping' AS category_name, 'Kingston Trekker' AS name, 'kingston-trekker' AS slug,
-         NULL AS description, 'https://lh3.googleusercontent.com/aida-public/AB6AXuASOMTH5MhJVqNeJeGV24XYVal_FPiiGYOy63I-sMwQFHjmggjpOyegBZM6geajAfic79wn3Xil3__-L3t3XyXLKiBsPjHoKmie0mm3MCyzANsH0l1Ug0UJsVJp5Gs4_D7ecGC9Yl4AanodF39ixyGjiGRa6MfmErOMTK5fZFgoScsJJZcDZgZn8c_IDJA21Q6vj5PGYNJ1_c5ZO5D_xVKWXH4lUNnvv7uvMMUHn_uhtcKnbOcQmEXGt9uGW2BJfYitLKx4bSqm2LMW' AS image_url,
+         'A rugged, high-performance hiking boot designed for Jamaica\'s toughest trails. Features waterproof lining and superior grip.' AS description, 'https://lh3.googleusercontent.com/aida-public/AB6AXuASOMTH5MhJVqNeJeGV24XYVal_FPiiGYOy63I-sMwQFHjmggjpOyegBZM6geajAfic79wn3Xil3__-L3t3XyXLKiBsPjHoKmie0mm3MCyzANsH0l1Ug0UJsVJp5Gs4_D7ecGC9Yl4AanodF39ixyGjiGRa6MfmErOMTK5fZFgoScsJJZcDZgZn8c_IDJA21Q6vj5PGYNJ1_c5ZO5D_xVKWXH4lUNnvv7uvMMUHn_uhtcKnbOcQmEXGt9uGW2BJfYitLKx4bSqm2LMW' AS image_url,
          120.00 AS price, NULL AS original_price, NULL AS badge_text, NULL AS badge_type, 25 AS inventory_qty
   UNION ALL
-  SELECT 'Footwear', 'Blue Mountain Boots', 'blue-mountain-boots', NULL,
+  SELECT 'Footwear', 'Blue Mountain Boots', 'blue-mountain-boots', 'Premium leather boots perfect for the misty peaks of the Blue Mountains. Durable, comfortable, and stylish.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuD25ytRN7A-UA7R-YHzJ6dZn2oPx58JJUdO1Xk2oWPiu6IGpjntcjAqzw_-ZRr2Dsxxapa-baAdPAqFviFvAQefdJKFbPYp5MjgQeJypH9YT7Bnj_NhgFLU7yusUyB9rvzZsYXUYqIkNm9swtyW2whOFjetmVzV0QS2PFi-Fp2qmUjovUfPa5oY7vttVZg1zTp6ejEE_B8stkucty6AAHi3Fyb9ziojBShLXN5HMz94k97vTWmK111ZMvXmFC3kIes6oW8gcP6wPo4G',
          145.00, NULL, NULL, NULL, 18
   UNION ALL
-  SELECT 'Camping Gear', 'Negril Beach Tent', 'negril-beach-tent', NULL,
+  SELECT 'Camping Gear', 'Negril Beach Tent', 'negril-beach-tent', 'Lightweight, easy-to-assemble tent providing 50+ UPF protection. Ideal for long days on the white sands of Negril.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuCIvEwZI8iEUL36pxjDsVlR5GWHozfhDeXbarHk34wmVxPRvpoXsyGRhzAILxPwllpu4B0TUesgnjRSfSJx67yb57Xsdj0VIriLRwV-4V06VI2_-VyCdsGLHA_KpoeAcDJAysrZulAngbhNmfF2kmUaeRkQLpX9XHREL6LsU9Hs5s8v8qdWiTZWpomQQ5IgVbg2o2G300AvEwH4f-368zBBfbZgC5g4MT1P2TYzDv-Xbq8bmM2JmIrFpd811SIZ5Ckt4EPqeaJFKklG',
          89.00, NULL, 'Best Seller', 'primary', 30
   UNION ALL
-  SELECT 'Apparel', 'Ocho Rios Rain Jacket', 'ocho-rios-rain-jacket', NULL,
+  SELECT 'Apparel', 'Ocho Rios Rain Jacket', 'ocho-rios-rain-jacket', 'Ultra-lightweight and breathable waterproof shell. Keeps you dry during tropical downpours in the garden parish.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuAMU9RgaImgt2cdLtezrN4eyig0KpRxSMGoiSR7cHLLHsuu8BwhD9DNKVVjVvrSUageAoCGvAwvCnoca1_L04pLleI0q0zFQ9OZ6NwxEA4ngly9Qe335m2lTHja-HuxwH64pgbECc0cH4kGlZ0yqMifigGw-McFCurDqPCPygAudAl4k9WoL0l6wAsbo7IoopfSJoNtCJru4SfjYqmKALzLbu-Npg7WmmQnoNMIql_TVnUyu6V1MaRTONb18tqOA8HELCzD1OKWbOzU',
          65.00, NULL, NULL, NULL, 16
   UNION ALL
-  SELECT 'Accessories', 'Island Life Bottle', 'island-life-bottle', NULL,
+  SELECT 'Accessories', 'Island Life Bottle', 'island-life-bottle', 'Double-walled vacuum insulated stainless steel bottle. Keeps your drinks ice-cold for 24 hours under the Caribbean sun.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuAoBYCaSjyMEkFL_1Nfs10bvK-7tJI91fTQzQr9piLc9J0VEMM-ZY8-xLTgQffCGngzKFXx01ZnLQTxSY8OPurIl7PCX8IIKxf0k8u2MjAxEVYQ3PlK0nSDm7lsuXv_BfYf2l88N2BGpWQXvr-3sJnX4Wz0TPNx0JfzRVI43AZSL0VRa5tAPvanF84L8Y7qOo0yZ97a0b6IBq-mDxA_9oThihWg5RqCYa28EDY8mRytHIdiCprCim__ZDM5fAZbE7SCyE8_7N1fVJSf',
          32.00, NULL, NULL, NULL, 40
   UNION ALL
-  SELECT 'Lighting', 'Montego Bay Lantern', 'montego-bay-lantern', NULL,
+  SELECT 'Lighting', 'Montego Bay Lantern', 'montego-bay-lantern', 'High-lumen LED lantern with multiple light modes. Perfect for beach bonfires or mountain camping.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuCaodw1a1ATowNuXEHnfWIYifTG6cZM5HzAjZ0Du9azYkvpHkfqhgpVfxo_w0f284Efy_bGWzvbnXrI_IVejs__X050zuOnqzVTJY0klNlukyybJD057gUmjfDJeT7625lL357OSxmvz5y9RcXSoXHeri1cLJziwD3NOy0cC5tZZRCwXdZr2hlkoii2VVt6t53Wmkl1TDM5YOa-_0LyM6Lo2w20jJK1f_MwXPbR5KI_rxEXlgzED6s41cOwTWiN2SIacoQSiYFP5vDK',
          45.00, 60.00, 'Sale', 'sale', 22
   UNION ALL
-  SELECT 'Cooking', 'Peak Gas Stove', 'peak-gas-stove', NULL,
+  SELECT 'Cooking', 'Peak Gas Stove', 'peak-gas-stove', 'Compact and efficient single-burner stove. Boiling water in minutes even at high altitudes.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuB4c3D0wAZaTnobrLN1NihZhjF4O-VSfltU5GVP06mPDV7FKQGCJbSAsNovy7MRrUUGMNlnur5-7Itnd1tndBYA4s5BU1RJCu-bleyMJxl4iD_5OWpWbrYxCqjxqdoZnE7rYljIl0gt0yhfjpc9V39x8vPszps_1Xeo-qJCCt-199nJtRbt9TfQYDc_ezcjYav8E2q88Pjq-g3S_0CW0sR4nvaUH59GrZvXBbIl_owvDjTUz6b0xs1uZdRPvEIR7xAPzZ_iEYSP7l_L',
          55.00, NULL, NULL, NULL, 14
   UNION ALL
-  SELECT 'Accessories', 'Multi-Tool Pro', 'multi-tool-pro', NULL,
+  SELECT 'Accessories', 'Multi-Tool Pro', 'multi-tool-pro', '18-in-1 stainless steel multi-tool. Includes everything from wire cutters to a heavy-duty serrated blade.',
          'https://lh3.googleusercontent.com/aida-public/AB6AXuByt6xBzsTpMIlyL9qmGpXcWMASJWUU-uMZvXbyi2Sj1859KyuKSt4Fuba6Ykv8PPU-NuwJaiuD4HWquuMmGy6TWpZttxWgIMbKgLpaHQ4kQcrayUT4ZuY7O4_mtYGiNhZ52tGd0R6kfRyqn5rwZVBtXamI2PDBrVKRGXStapXT6ECqOahFDy3n-rMmE_6vuFXO71r2R70ZqePEP0jped8cVh2ozZu6VxWdiFY1XhVLC3lu_q9NeBHGaW-eAEtUDFpo-yDNrvjO53_i',
          42.00, NULL, NULL, NULL, 35
 ) AS p

@@ -5,34 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { ShopComponent } from './pages/shop/shop.component';
-import { SigninComponent } from './pages/signin/signin.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { CartComponent } from './pages/cart/cart.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { PrivacyComponent } from './pages/privacy/privacy.component';
-import { BlogComponent } from './pages/blog/blog.component';
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent,
-    ShopComponent,
-    SigninComponent,
-    SignupComponent,
-    CartComponent,
-    MainLayoutComponent,
-    AdminComponent,
-    PrivacyComponent,
-    BlogComponent,
-    ProductDetailComponent
+    MainLayoutComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

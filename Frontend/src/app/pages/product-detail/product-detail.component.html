@@ -1,1 +1,98 @@
-<p>product-detail works!</p>
+<main class="container product-detail-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading adventure gear...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <span class="material-symbols-outlined error-icon">error</span>
+    <h3>Oops!</h3>
+    <p>{{ error }}</p>
+    <button (click)="goBack()" class="btn btn-primary">Back to Shop</button>
+  </div>
+
+  <!-- Product Details -->
+  <div *ngIf="product && !loading" class="product-layout">
+    <nav class="breadcrumb">
+      <a routerLink="/shop">Shop</a>
+      <span class="separator">/</span>
+      <span class="current">{{ product.category }}</span>
+    </nav>
+
+    <div class="product-grid">
+      <!-- Image Gallery -->
+      <div class="product-gallery">
+        <div class="main-image-wrapper">
+          <span *ngIf="product.badge" class="badge" [ngClass]="'badge-' + product.badge.type">
+            {{ product.badge.text }}
+          </span>
+          <img 
+            [ngSrc]="product.image" 
+            [alt]="product.name" 
+            width="600" 
+            height="600"
+            class="main-image"
+            priority>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="product-info">
+        <p class="category-tag">{{ product.category }}</p>
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        <div class="price-section">
+          <ng-container *ngIf="product.originalPrice; else singlePrice">
+            <span class="current-price sale">${{ product.price | number:'1.2-2' }}</span>
+            <span class="original-price">${{ product.originalPrice | number:'1.2-2' }}</span>
+          </ng-container>
+          <ng-template #singlePrice>
+            <span class="current-price">${{ product.price | number:'1.2-2' }}</span>
+          </ng-template>
+        </div>
+
+        <div class="description">
+          <h3>Description</h3>
+          <p>{{ product.description }}</p>
+        </div>
+
+        <div class="purchase-actions">
+          <div class="quantity-selector">
+            <button (click)="quantity = quantity > 1 ? quantity - 1 : 1" type="button" class="qty-btn">-</button>
+            <input type="number" [(ngModel)]="quantity" min="1" class="qty-input">
+            <button (click)="quantity = quantity + 1" type="button" class="qty-btn">+</button>
+          </div>
+          
+          <button (click)="addToCart()" class="btn btn-add-to-cart">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <span class="material-symbols-outlined">local_shipping</span>
+            <div class="feature-text">
+              <strong>Free Island Delivery</strong>
+              <span>On orders over $50</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="material-symbols-outlined">verified_user</span>
+            <div class="feature-text">
+              <strong>1-Year Warranty</strong>
+              <span>Island-wide support</span>
+            </div>
+          </div>
+        </div>
+
+        <button (click)="goBack()" class="btn-back">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Back to Shop
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
