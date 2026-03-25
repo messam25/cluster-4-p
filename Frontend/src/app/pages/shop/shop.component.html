@@ -36,9 +36,22 @@
           </select>
           <span class="material-symbols-outlined select-arrow">sort</span>
         </div>
+
+        <div class="search-wrapper" style="margin-left: 1rem;">
+          <label class="sr-only" for="search-input">Search Gear</label>
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Search gear..."
+            class="custom-input"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="applyFilters()"
+            style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; outline: none;"
+          />
+        </div>
       </div>
 
-      <div class="results-text">
+      <div class="results-text" aria-live="polite" aria-atomic="true">
         Showing
         <span class="results-bold">{{ displayedProducts.length }}</span> products
       </div>
@@ -93,10 +106,14 @@
     </article>
   </section>
 
-  <section class="load-more-section">
+  <section class="load-more-section" style="display: flex; gap: 1rem; justify-content: center;">
     <button type="button" class="btn-load-more">
       Load More Products
       <span class="material-symbols-outlined">expand_more</span>
+    </button>
+    <button type="button" class="btn-load-more" (click)="importXmlFeed()" style="background-color: #15803d; color: white;">
+      Import XML Catalog
+      <span class="material-symbols-outlined">download</span>
     </button>
   </section>
 </main>

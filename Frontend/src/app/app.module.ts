@@ -14,6 +14,9 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { AdminComponent } from './pages/admin/admin.component';
     SignupComponent,
     CartComponent,
     MainLayoutComponent,
-    AdminComponent
+    AdminComponent,
+    PrivacyComponent,
+    BlogComponent,
+    ProductDetailComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

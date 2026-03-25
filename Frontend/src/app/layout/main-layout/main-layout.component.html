@@ -2,13 +2,17 @@
   <span class="material-symbols-outlined close-menu" (click)="closeMenu()"
     >close</span
   >
-  <nav class="mobile-nav">
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <a routerLink="/shop" (click)="closeMenu()">Shop</a>
     <a routerLink="/about" (click)="closeMenu()">About</a>
     <a routerLink="/contact" (click)="closeMenu()">Contact</a>
-    <a routerLink="/signin" (click)="closeMenu()">signin</a>
-    <a routerLink="/signup" (click)="closeMenu()">signup</a>
+    <a routerLink="/blog" (click)="closeMenu()">Blog</a>
+    <a routerLink="/signin" (click)="closeMenu()">Sign In</a>
+    <a routerLink="/signup" (click)="closeMenu()">Sign Up</a>
   </nav>
 </div>
+
+<a href="#main-content" class="skip-link sr-only focus:not-sr-only">Skip to content</a>
 
 <div class="container">
   <header>
@@ -23,25 +27,27 @@
           </div></a
         >
 
-        <nav class="desktop-nav">
+        <nav class="desktop-nav" aria-label="Main Navigation">
+          <a class="nav-link" routerLink="/shop">Shop</a>
           <a class="nav-link" routerLink="/about">About</a>
           <a class="nav-link" routerLink="/contact">Contact</a>
-          <a class="nav-link" routerLink="/signin">signin</a>
-          <a class="nav-link" routerLink="/signup">signup</a>
+          <a class="nav-link" routerLink="/blog">Blog</a>
+          <a class="nav-link" routerLink="/signin">Sign In</a>
+          <a class="nav-link" routerLink="/signup">Sign Up</a>
         </nav>
         <div class="header-actions">
           <a routerLink="/cart" class="cart-button">
             <span class="material-symbols-outlined">shopping_cart</span>
             <span class="cart-badge"></span>
           </a>
-          <button type="button" class="menu-button" (click)="toggleMenu()">
+          <button type="button" class="menu-button" aria-label="Toggle Navigation Menu" aria-controls="mobile-nav" (click)="toggleMenu()">
             <span class="material-symbols-outlined">menu</span>
           </button>
         </div>
       </div>
     </div>
   </header>
-  <div class="main-area">
+  <div class="main-area" id="main-content" tabindex="-1">
     <router-outlet></router-outlet>
   </div>
   <footer>
@@ -84,6 +90,7 @@
             <li><a href="#">Shipping Policy</a></li>
             <li><a href="#">Returns</a></li>
             <li><a routerLink="/contact">Contact Us</a></li>
+            <li><a routerLink="/privacy">Privacy Notice</a></li>
           </ul>
         </div>
       </div>

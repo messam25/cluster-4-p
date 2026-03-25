@@ -11,10 +11,10 @@ const router = Router();
 router.post(
   '/',
   [
-    body('fullName').trim().notEmpty().withMessage('Full name is required.'),
+    body('fullName').trim().notEmpty().escape().withMessage('Full name is required.'),
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required.'),
-    body('subject').trim().notEmpty().withMessage('Subject is required.'),
-    body('message').trim().isLength({ min: 5 }).withMessage('Message is too short.'),
+    body('subject').trim().notEmpty().escape().withMessage('Subject is required.'),
+    body('message').trim().isLength({ min: 5 }).escape().withMessage('Message is too short.'),
   ],
   validate,
   async (req, res, next) => {

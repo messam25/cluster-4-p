@@ -42,6 +42,7 @@ export class ShopComponent implements OnInit {
 
   selectedCategory = 'All Categories';
   sortBy = 'Recommended';
+  searchTerm = '';
 
   private allProducts: ShopProduct[] = [];
   displayedProducts: ShopProduct[] = [];
@@ -73,6 +74,14 @@ export class ShopComponent implements OnInit {
       this.selectedCategory === 'All Categories'
         ? [...this.allProducts]
         : this.allProducts.filter((p) => p.category === this.selectedCategory);
+
+    if (this.searchTerm.trim()) {
+      const term = this.searchTerm.toLowerCase().trim();
+      list = list.filter((p) => 
+        p.name.toLowerCase().includes(term) || 
+        p.category.toLowerCase().includes(term)
+      );
+    }
 
     switch (this.sortBy) {
       case 'Price: Low to High':
@@ -109,6 +118,47 @@ export class ShopComponent implements OnInit {
       console.error(e);
       const msg = (e as any)?.error?.error ?? 'Failed to add product. Try again.';
       alert(msg);
+    }
+  }
+
+  async importXmlFeed(): Promise<void> {
+    try {
+      const response = await fetch('/assets/products.xml');
+      const xmlText = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+      
+      const productNodes = xmlDoc.getElementsByTagName('product');
+      const loadedProducts: ShopProduct[] = [];
+      
+      for (let i = 0; i < productNodes.length; i++) {
+        const node = productNodes[i];
+        const name = node.getElementsByTagName('name')[0]?.textContent || '';
+        const category = node.getElementsByTagName('category')[0]?.textContent || '';
+        const price = parseFloat(node.getElementsByTagName('price')[0]?.textContent || '0');
+        const originalPriceText = node.getElementsByTagName('originalPrice')[0]?.textContent;
+        const image = node.getElementsByTagName('image')[0]?.textContent || '';
+        const badgeText = node.getElementsByTagName('badge')[0]?.textContent;
+        const badgeType = node.getElementsByTagName('badgeType')[0]?.textContent;
+        
+        let badge = null;
+        if (badgeText && badgeType) {
+          badge = { text: badgeText, type: badgeType };
+        }
+        
+        const newProduct: ShopProduct = {
+          name, category, price, image, badge,
+          originalPrice: originalPriceText ? parseFloat(originalPriceText) : undefined
+        };
+        loadedProducts.push(newProduct);
+      }
+      
+      this.allProducts = [...this.allProducts, ...loadedProducts];
+      this.applyFilters();
+      alert(`Successfully imported ${loadedProducts.length} products from XML feed!`);
+    } catch (error) {
+      console.error('Error loading XML feed', error);
+      alert('Failed to load XML product feed.');
     }
   }
 }

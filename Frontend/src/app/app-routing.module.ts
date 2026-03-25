@@ -9,6 +9,9 @@ import { CartComponent } from './pages/cart/cart.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -19,7 +22,10 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'shop', component: ShopComponent },
+      { path: 'product/:id', component: ProductDetailComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'privacy', component: PrivacyComponent },
+      { path: 'blog', component: BlogComponent },
     ],
   },
   { path: 'signin', component: SigninComponent },

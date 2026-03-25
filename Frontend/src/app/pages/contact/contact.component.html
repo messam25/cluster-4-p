@@ -149,6 +149,8 @@
                   type="text"
                   [(ngModel)]="fullName"
                   name="fullName"
+                  required
+                  aria-required="true"
                 />
               </div>
               <!-- Email Field -->
@@ -165,6 +167,8 @@
                   type="email"
                   [(ngModel)]="email"
                   name="email"
+                  required
+                  aria-required="true"
                 />
               </div>
               <!-- Subject Dropdown -->
@@ -180,6 +184,8 @@
                     id="subject"
                     [(ngModel)]="subject"
                     name="subject"
+                    required
+                    aria-required="true"
                   >
                     <option>General Inquiry</option>
                     <option>Order Status</option>
@@ -207,9 +213,13 @@
                   rows="5"
                   [(ngModel)]="message"
                   name="message"
+                  required
+                  aria-required="true"
                 ></textarea>
               </div>
-              <!-- Submit Button -->
+              <div class="text-sm text-gray-500 dark:text-gray-400 mt-2 mb-2">
+                <strong>Data Use Notice:</strong> The information you provide will be used strictly to respond to your inquiry and provide customer service. We do not share your details with third parties for marketing purposes.
+              </div>
               <button
                 class="mt-2 w-full bg-primary hover:bg-[#0fb839] text-[#052e16] font-bold text-lg py-4 rounded-lg transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2 disabled:opacity-60"
                 type="submit"

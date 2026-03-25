@@ -32,13 +32,13 @@
             <div
               *ngFor="let item of cartItems; let i = index"
               class="cart-item">
-              <div class="product-info">
+              <div class="cart-product-info">
                 <div
-                  class="product-image"
+                  class="cart-product-image"
                   [style.background-image]="'url(' + item.image + ')'"></div>
-                <div class="product-details">
-                  <h3 class="product-name">{{ item.name }}</h3>
-                  <p class="product-variant">{{ item.category }}</p>
+                <div class="cart-product-details">
+                  <h3 class="cart-product-name">{{ item.name }}</h3>
+                  <p class="cart-product-variant">{{ item.category }}</p>
                   <span class="stock-badge in-stock">In Stock</span>
                 </div>
               </div>
@@ -93,54 +93,47 @@
           </div>
 
           <div class="order-summary">
-            <div class="summary-card">
-              <h2 class="summary-title">Order Summary</h2>
+            <div class="sleek-summary-card">
+              <h2 class="sleek-title">Order Summary</h2>
 
-              <div class="summary-stack">
-                <div class="summary-row">
-                  <span>Subtotal</span>
-                  <span>${{ subtotal | number : '1.2-2' }}</span>
+              <div class="sleek-details">
+                <div class="sleek-row">
+                  <span class="sleek-label">Subtotal</span>
+                  <span class="sleek-value">${{ subtotal | number : '1.2-2' }}</span>
                 </div>
-                <div class="summary-row italic">
-                  <span>Shipping Estimate</span>
-                  <span>Calculated at checkout</span>
+                <div class="sleek-row">
+                  <span class="sleek-label">Shipping</span>
+                  <span class="sleek-value shipping-calc">Calculated at checkout</span>
                 </div>
-                <div class="summary-row">
-                  <span>Tax Estimate</span>
-                  <span>${{ tax | number : '1.2-2' }}</span>
+                <div class="sleek-row">
+                  <span class="sleek-label">Ext. Tax</span>
+                  <span class="sleek-value">${{ tax | number : '1.2-2' }}</span>
                 </div>
               </div>
 
-              <div class="summary-divider">
-                <div class="total-row">
-                  <span>Total</span>
-                  <span class="total-price">${{ total | number : '1.2-2' }}</span>
-                </div>
+              <div class="sleek-divider"></div>
+
+              <div class="sleek-total">
+                <span class="sleek-total-label">Total</span>
+                <span class="sleek-total-value">${{ total | number : '1.2-2' }}</span>
               </div>
 
-              <div class="summary-actions">
-                <div class="promo-row">
-                  <input
-                    class="promo-input"
-                    type="text"
-                    placeholder="Promo code" />
-                  <button type="button" class="btn btn-apply">Apply</button>
+              <div class="sleek-promo">
+                <div class="sleek-input-wrapper">
+                  <span class="material-symbols-outlined promo-icon">local_offer</span>
+                  <input class="sleek-promo-input" type="text" placeholder="Promo code" />
                 </div>
-
-                <button
-                  type="button"
-                  class="btn-checkout"
-                  (click)="openCheckoutConfirm()">
-                  <span class="material-symbols-outlined">lock</span>
-                  Proceed to Checkout
-                </button>
+                <button type="button" class="sleek-btn-apply">Apply</button>
               </div>
 
-              <div class="secure-badge">
-                <div class="secure-row">
-                  <span class="material-symbols-outlined">verified_user</span>
-                  <span>Secure Checkout</span>
-                </div>
+              <button type="button" class="sleek-btn-checkout" (click)="openCheckoutConfirm()">
+                Proceed to Checkout
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+
+              <div class="sleek-secure">
+                <span class="material-symbols-outlined">shield_check</span>
+                <span>Payments are secure and encrypted.</span>
               </div>
             </div>
           </div>

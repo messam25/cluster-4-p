@@ -21,6 +21,35 @@ body {
   overflow-x: hidden;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link:focus, .focus\:not-sr-only:focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: #11d442;
+  color: #102215;
+  font-weight: bold;
+}
+
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   body {
@@ -184,7 +213,7 @@ header {
 }
 
 .nav-link:hover {
-  color: #11d442;
+  color: #15803d;
 }
 
 /* Header Actions */
@@ -399,7 +428,7 @@ main {
 }
 
 .view-all-link {
-  color: #11d442;
+  color: #15803d;
   font-weight: 700;
   font-size: 0.875rem;
   text-decoration: none;
@@ -596,6 +625,7 @@ main {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
 }
 
 .product-description {
@@ -633,8 +663,8 @@ main {
 }
 
 .add-to-cart-button:hover {
-  background-color: #11d442;
-  color: #102215;
+  background-color: #15803d;
+  color: #ffffff;
 }
 
 /* Promo Banner */

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product id="xml-001">
+        <name>Ocho Rios River Shoes</name>
+        <category>Footwear</category>
+        <price>3500</price>
+        <originalPrice>4500</originalPrice>
+        <description>Durable river shoes for waterfalls and hiking.</description>
+        <image>https://lh3.googleusercontent.com/aida-public/AB6AXuBi705yo0g4I2ux-pBuKnD58V5f0z8AVLhdhaul6YcYqFqbxl5567hI7Imj82ALCtcbvIdfSLCbaE1x7hZlDyLojSiK7R3lBfOh-br66l0p6yHYsntlqJsh_X8YiTx7hwkMB7kaEW7LqliWbtUeaemVvWNnlQJlND8qqZSDsNiUiq0h29gAj_Rx6mIaVhkaXYocv95oX5BWsqmQrG-wNyXgsWi_N2pq24v7u9K6zjwZgdDTa6Cvwew0UwHvogdd5oXg-jWGM11FgCZr</image>
+        <badge>Sale</badge>
+        <badgeType>sale</badgeType>
+    </product>
+    <product id="xml-002">
+        <name>Portland Rain Jacket</name>
+        <category>Apparel</category>
+        <price>8500</price>
+        <description>Lightweight waterproof jacket for sudden tropical showers.</description>
+        <image>https://lh3.googleusercontent.com/aida-public/AB6AXuAvnmZJ2UD6y1nPCPUiXqeF6btfdd2uAo8BVyiCkxrv1sf8sOKMaOSOBjuWEAGSZlH3PxQQz-FmoPsTLRUu7W9IyVeLbr0rBCL7eISeyBImjtdGOm5MQcdP0lcYJCtTB-rc9kx-YBQYZD4mDMRCTOCSvZr--6EBZlfereU5ffABxMhNSTSQ1tWPOjlA4N81wmgsdBNDkEmQT8Oa_BOBQlB4gHNbLT3q5G7LiV6CJHeTqA25F1bXIrzvZPAI0h-326EoqYQ97R94eBpf</image>
+        <badge>New</badge>
+        <badgeType>primary</badgeType>
+    </product>
+</products>

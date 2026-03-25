@@ -1,1 +1,15 @@
 <router-outlet></router-outlet>
+
+<!-- Cookie Consent Banner -->
+<div *ngIf="showCookieBanner" class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] transition-transform duration-300 transform translate-y-0"
+     style="position: fixed; bottom: 0; width: 100%; background: #ffffff; padding: 16px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); z-index: 9999; display: flex; justify-content: space-between; align-items: center;">
+  <div style="flex: 1; margin-right: 16px;">
+    <p style="margin: 0; font-size: 14px; color: #333;">
+      We use cookies to improve your experience and measure performance. By continuing to use this site, you consent to our use of cookies.
+      <a routerLink="/privacy" style="color: #15803d; text-decoration: underline;">Learn more in our Privacy Notice</a>.
+    </p>
+  </div>
+  <button (click)="acceptCookies()" style="padding: 8px 16px; background-color: #15803d; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; white-space: nowrap;">
+    Accept All
+  </button>
+</div>
