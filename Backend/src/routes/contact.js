@@ -12,7 +12,7 @@ router.post(
   '/',
   [
     body('fullName').trim().notEmpty().escape().withMessage('Full name is required.'),
-    body('email').isEmail().normalizeEmail().withMessage('Valid email is required.'),
+    body('email').trim().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).withMessage('Valid email with Top-Level Domain is required.'),
     body('subject').trim().notEmpty().escape().withMessage('Subject is required.'),
     body('message').trim().isLength({ min: 5 }).escape().withMessage('Message is too short.'),
   ],

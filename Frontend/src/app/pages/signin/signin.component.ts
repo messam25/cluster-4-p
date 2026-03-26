@@ -35,6 +35,7 @@ export class SigninComponent {
       const res = await this.api.signin(email, this.password).toPromise();
       if (res) {
         this.api.saveToken(res.token);
+        await this.api.syncGuestCart();
       }
       alert('Login successful!');
       await this.router.navigateByUrl('/shop');

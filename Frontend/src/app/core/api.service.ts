@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface AuthResponse {
@@ -104,6 +104,9 @@ export class ApiService {
 
   // ── Cart ──────────────────────────────────────────────────────────────────
   getCart(): Observable<CartItem[]> {
+    if (!this.getToken()) {
+      return of(this.getGuestCart());
+    }
     return this.http.get<CartItem[]>(`${this.base}/api/cart`, {
       headers: this.authHeaders(),
     });
@@ -115,21 +118,70 @@ export class ApiService {
     category: string;
     image: string;
   }): Observable<{ message: string }> {
+    if (!this.getToken()) {
+      const cart = this.getGuestCart();
+      cart.push({
+        ...product,
+        id: 'guest_' + Date.now().toString(),
+        quantity: 1,
+        addedAt: new Date().toISOString()
+      });
+      this.saveGuestCart(cart);
+      return of({ message: 'Added to guest cart' });
+    }
     return this.http.post<{ message: string }>(`${this.base}/api/cart`, product, {
       headers: this.authHeaders(),
     });
   }
 
   removeCartItem(id: string): Observable<void> {
+    if (!this.getToken()) {
+      let cart = this.getGuestCart();
+      cart = cart.filter(i => i.id !== id);
+      this.saveGuestCart(cart);
+      return of(undefined);
+    }
     return this.http.delete<void>(`${this.base}/api/cart/${id}`, {
       headers: this.authHeaders(),
     });
   }
 
   checkoutCart(): Observable<void> {
+    if (!this.getToken()) {
+      this.saveGuestCart([]);
+      return of(undefined);
+    }
     return this.http.delete<void>(`${this.base}/api/cart/checkout`, {
       headers: this.authHeaders(),
     });
+  }
+
+  // ── Guest Cart Helpers ────────────────────────────────────────────────────
+  private getGuestCart(): CartItem[] {
+    const stored = localStorage.getItem('guest_cart');
+    return stored ? JSON.parse(stored) : [];
+  }
+
+  private saveGuestCart(cart: CartItem[]): void {
+    localStorage.setItem('guest_cart', JSON.stringify(cart));
+  }
+
+  async syncGuestCart(): Promise<void> {
+    const cart = this.getGuestCart();
+    if (cart.length === 0) return;
+    for (const item of cart) {
+      try {
+        await this.http.post(`${this.base}/api/cart`, {
+          name: item.name,
+          price: item.price,
+          category: item.category,
+          image: item.image,
+        }, { headers: this.authHeaders() }).toPromise();
+      } catch (e) {
+        console.error('Failed to sync guest cart item', e);
+      }
+    }
+    this.saveGuestCart([]);
   }
 
   // ── Contact ───────────────────────────────────────────────────────────────

@@ -47,9 +47,11 @@
           </ng-template>
         </nav>
         <div class="header-actions">
+          <a routerLink="/wishlist" class="wishlist-button" aria-label="View Wishlist" style="display: flex; align-items: center; justify-content: center; color: #111813; text-decoration: none;">
+            <span class="material-symbols-outlined" style="font-size: 24px;">favorite</span>
+          </a>
           <a routerLink="/cart" class="cart-button" aria-label="View Cart">
             <span class="material-symbols-outlined">shopping_cart</span>
-            <span class="cart-badge"></span>
           </a>
           <button type="button" class="menu-button" aria-label="Toggle Navigation Menu" aria-controls="mobile-nav" (click)="toggleMenu()">
             <span class="material-symbols-outlined">menu</span>

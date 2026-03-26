@@ -32,6 +32,11 @@
         </div>
 
         <div class="control-item">
+          <label for="price-select">Max Price: ${{ maxPrice }}</label>
+          <input id="price-select" type="range" min="0" max="500" step="10" [(ngModel)]="maxPrice" (ngModelChange)="applyFilters()" style="width: 100%; cursor: pointer;" />
+        </div>
+
+        <div class="control-item">
           <label for="sort-select">Sort</label>
           <select id="sort-select" [(ngModel)]="sortBy" (ngModelChange)="applyFilters()">
             <option *ngFor="let s of sortOptions" [value]="s">{{ s }}</option>
@@ -69,7 +74,7 @@
           />
         </a>
 
-        <button type="button" class="btn-wishlist" aria-label="Add to wishlist">
+        <button type="button" class="btn-wishlist" aria-label="Add to wishlist" (click)="addToWishlist(product)">
           <span class="material-symbols-outlined">favorite</span>
         </button>
 

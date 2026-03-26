@@ -12,6 +12,7 @@ export class ContactComponent {
   subject = 'General Inquiry';
   message = '';
   sending = false;
+  isSubmitted = false;
 
   constructor(private readonly api: ApiService) {}
 
@@ -20,6 +21,13 @@ export class ContactComponent {
       alert('Please fill in all required fields.');
       return;
     }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.email.trim())) {
+      alert('Please enter a valid email address with a TLD (e.g. user@domain.com).');
+      return;
+    }
+
     this.sending = true;
     try {
       const res = await this.api
@@ -30,7 +38,7 @@ export class ContactComponent {
           message: this.message.trim(),
         })
         .toPromise();
-      alert(res?.message ?? 'Message sent!');
+      this.isSubmitted = true;
       this.fullName = '';
       this.email = '';
       this.subject = 'General Inquiry';

@@ -46,6 +46,7 @@ export class SignupComponent {
       const res = await this.api.signup(fullName, email, password).toPromise();
       if (res?.token) {
         this.api.saveToken(res.token);
+        await this.api.syncGuestCart();
       }
       alert('Account created! Please sign in.');
       await this.router.navigateByUrl('/signin');

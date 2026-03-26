@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'shop', loadChildren: () => import('./pages/shop/shop.module').then(m => m.ShopModule) },
       { path: 'product/:id', loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailModule) },
       { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule) },
+      { path: 'wishlist', loadChildren: () => import('./pages/wishlist/wishlist.module').then(m => m.WishlistModule) },
       { path: 'privacy', loadChildren: () => import('./pages/privacy/privacy.module').then(m => m.PrivacyModule) },
       { path: 'blog', loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule) },
     ],

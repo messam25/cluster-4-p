@@ -44,6 +44,7 @@ export class ShopComponent implements OnInit {
   selectedCategory = 'All Categories';
   sortBy = 'Recommended';
   searchTerm = '';
+  maxPrice = 500;
 
   private allProducts: ShopProduct[] = [];
   displayedProducts: ShopProduct[] = [];
@@ -75,6 +76,9 @@ export class ShopComponent implements OnInit {
       this.selectedCategory === 'All Categories'
         ? [...this.allProducts]
         : this.allProducts.filter((p) => p.category === this.selectedCategory);
+
+    // Apply Price Filter
+    list = list.filter((p) => p.price <= this.maxPrice);
 
     if (this.searchTerm.trim()) {
       const term = this.searchTerm.toLowerCase().trim();
@@ -119,6 +123,26 @@ export class ShopComponent implements OnInit {
       console.error(e);
       const msg = (e as any)?.error?.error ?? 'Failed to add product. Try again.';
       alert(msg);
+    }
+  }
+
+  addToWishlist(product: ShopProduct): void {
+    const stored = localStorage.getItem('guest_wishlist');
+    let wishlist: any[] = stored ? JSON.parse(stored) : [];
+    
+    // Prevent duplicates
+    if (!wishlist.some(item => item.id === product.id)) {
+      wishlist.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        image: product.image
+      });
+      localStorage.setItem('guest_wishlist', JSON.stringify(wishlist));
+      alert(`${product.name} added to your wishlist!`);
+    } else {
+      alert(`${product.name} is already in your wishlist!`);
     }
   }
 
